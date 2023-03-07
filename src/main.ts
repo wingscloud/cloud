@@ -8,6 +8,7 @@ import { AppModule } from './app.module'
 import { TransformInterceptor } from './common/interceptors/transform.interceptor'
 import { AllExceptionsFilter } from './common/exceptions/base.exception.filter'
 import { HttpExceptionFilter } from './common/exceptions/http.exception.filter'
+import { generateDocument } from './doc'
 
 declare const module: any
 
@@ -21,6 +22,8 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new TransformInterceptor())
   app.useGlobalFilters(new AllExceptionsFilter(), new HttpExceptionFilter())
+
+  generateDocument(app)
 
   if (module.hot) {
     module.hot.accept()
